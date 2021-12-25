@@ -1,11 +1,12 @@
 namespace AutomateInstall;
 using System.Diagnostics;
+using System.Linq;
 public static class Installer
 {
     public static void RunInstallation(string path)
     {
         Directory.SetCurrentDirectory(path);
-        var objs = Directory.EnumerateFiles(Directory.GetCurrentDirectory());
+        var objs = Directory.EnumerateFiles(Directory.GetCurrentDirectory()).Where(f => f.Contains(".exe"));
         foreach (var obj in objs)
         {
             try
