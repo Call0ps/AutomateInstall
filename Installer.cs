@@ -15,6 +15,7 @@ public static class Installer
                 process.StartInfo.FileName = obj;
                 process.StartInfo.CreateNoWindow = true;
                 process.Start();
+                process.WaitForExit();
             }
             catch (Exception e)
             {
