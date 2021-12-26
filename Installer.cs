@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 public static class Installer
 {
-    public static void RunInstallation(string path)
+    public static async Task RunInstallation(string path)
     {
         Directory.SetCurrentDirectory(path);
         var objs = Directory.EnumerateFiles(Directory.GetCurrentDirectory()).Where(f => f.Contains(".exe"));
@@ -11,11 +11,13 @@ public static class Installer
         {
             try
             {
-                using Process process = new Process();
+                Console.WriteLine("Starting installation of {0}", obj);
+                using Process process = new();
                 process.StartInfo.FileName = obj;
                 process.StartInfo.CreateNoWindow = true;
                 process.Start();
-                process.WaitForExit();
+                await process.WaitForExitAsync();
+                Console.WriteLine("Finished installation of {0}", obj);
             }
             catch (Exception e)
             {

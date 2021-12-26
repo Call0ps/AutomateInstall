@@ -2,9 +2,17 @@
 using AutomateInstall;
 
 Console.WriteLine("Hello, World!");
-var currentDir = Directory.GetCurrentDirectory();
-string inputFile = currentDir + "\\input.csv";
-StringsAndStuff pathHandler = new(inputFile);
-DownloadStuff downloadHander = new(pathHandler.GetDownloads);
-downloadHander.Run();
-Installer.RunInstallation(currentDir);
+await Run();
+
+static async Task Run()
+{
+    var currentDir = Directory.GetCurrentDirectory();
+    string inputFile = currentDir + "\\input.csv";
+    Console.WriteLine("Running StringsAndStuff");
+    StringsAndStuff pathHandler = new(inputFile);
+    DownloadStuff downloadHander = new(pathHandler.GetDownloads);
+    Console.WriteLine("Downloading files...");
+    await downloadHander.Run();
+    Console.WriteLine("Running installation!");
+    await Installer.RunInstallation(currentDir);
+}

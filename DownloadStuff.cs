@@ -9,7 +9,7 @@ internal class DownloadStuff
     {
         dls = downloads;
     }
-    public async void Run()
+    public async Task Run()
     {
         foreach (var dl in dls)
         {
